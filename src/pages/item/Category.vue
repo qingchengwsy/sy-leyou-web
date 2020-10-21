@@ -23,13 +23,26 @@
     methods: {
       handleAdd(node) {
         console.log("add .... ");
-        console.log(node);
+        this.$http.post("/item/category/add",node)
+          .then(({data})=>{
+          if (data===true){
+            alert("添加成功");
+          }else{
+            alert("添加失败");
+          }
+        });
       },
       handleEdit(id, name) {
         console.log("edit... id: " + id + ", name: " + name)
+        this.$http.post("/item/category/update",id,name);
       },
       handleDelete(id) {
-        console.log("delete ... " + id)
+        this.$http.get("/item/category/delete/"+id)
+        .then(({data})=>{
+          if (data===true){
+            console.log("delete---"+data)
+          }
+        });
       },
       handleClick(node) {
         console.log(node)
